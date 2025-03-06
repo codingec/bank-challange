@@ -1,0 +1,12 @@
+{
+  "person": {
+    "name": "Test",
+    "gender": "Masculino",
+    "age": 9,
+    "nationalId": "1111122221",
+    "address": "Juan Jose Leanodas Proaño y La que cruza",
+    "telephone": "0969372466"
+  },
+  "password": "123",
+  "status": true
+}
