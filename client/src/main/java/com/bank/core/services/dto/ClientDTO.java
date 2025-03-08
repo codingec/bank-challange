@@ -1,9 +1,20 @@
 package com.bank.core.services.dto;
 
-import com.fasterxml.jackson.annotation.*;
+import com.bank.core.util.GenderTypeSerializer;
+import com.bank.core.util.serialize.BooleanTypeSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import jakarta.validation.constraints.Pattern;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -26,6 +37,7 @@ public class ClientDTO implements Serializable {
     @NotEmpty
     @Size(min = 2, max= 16, message = "Por favor insertar una contraseña correcta.")
     private String password;
-
+    @JsonSerialize(using = BooleanTypeSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Boolean status;
 }

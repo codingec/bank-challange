@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@Tag(name = "Client", description = "Client crud")
+@Tag(name = "Client", description = "Client CRUD")
 public interface ClientApi {
 
     ResponseEntity<ClientDTO> create(@Valid @RequestBody ClientDTO clientDto) ;

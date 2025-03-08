@@ -1,9 +1,16 @@
 package com.bank.core.model.person;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,9 +23,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity
 @Table(name = "person")
-@JsonIdentityInfo(generator =
-        ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public class Person implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -31,7 +35,7 @@ public class Person implements Serializable {
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
-    @Column(name = "gender", length = 15, nullable = false)
+    @Column(name = "gender", nullable = false)
     private String gender;
 
     @Column(name = "age", nullable = false)

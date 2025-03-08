@@ -10,7 +10,15 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -27,29 +35,37 @@ public class ClientController implements ClientApi {
 
     @PostMapping
     public ResponseEntity<ClientDTO> create(@Valid @RequestBody ClientDTO clientDto) {
+        log.info("Processing Create request for clientIdentification={}, endpointMethod={}",
+                clientDto.getPerson().getNationalId(), "create");
         return this.clientService.create(clientDto);
     }
 
     @GetMapping
     public ResponseEntity<List<ClientDTO>> getAll() {
+        log.info("Processing get all request for client={}, endpointMethod={}",
+                "allClients", "getAll");
         return this.clientService.getAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClientDTO> getClientById(@PathVariable Long id) {
+        log.info("Processing get by client id request for clientId={}, endpointMethod={}",
+                id, "getClientById");
         return this.clientService.getClientById(id);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ClientDTO> update(@PathVariable Long id, @Valid @RequestBody ClientDTO clientDto) {
+        log.info("Processing update request for clientId={}, clientIdentification={}, endpointMethod={}",
+                id, clientDto.getPerson().getNationalId(), "update");
         return this.clientService.update(id, clientDto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseDTO> delete(@PathVariable Long id) {
-        this.clientService.delete(id);
-        return ResponseEntity.ok(ResponseDTO.builder()
-                .message("Client "+id+" was deleted successfully")
-                .build());
+        log.info("Processing delete request for clientId={},  endpointMethod={}",
+                id,  "delete");
+        return this.clientService.delete(id);
+
     }
 }

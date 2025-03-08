@@ -36,9 +36,7 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.6.2'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
 
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.instancio:instancio-core:5.1.0'
 	testImplementation 'org.instancio:instancio-junit:5.1.0'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -46,9 +44,6 @@ dependencies {
 	testAnnotationProcessor  'org.projectlombok:lombok:1.18.34'
 	testRuntimeOnly 'com.h2database:h2'
 
-}
-configurations.configureEach {
-	exclude group: 'org.yaml', module: "snakeyaml"
 }
 
 jacoco {

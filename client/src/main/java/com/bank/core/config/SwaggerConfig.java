@@ -13,6 +13,6 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("Banks")
                         .version("1.0")
-                        .description("API documentation for Banks"));
+                        .description("API documentation for Bank Clients"));
     }
 }

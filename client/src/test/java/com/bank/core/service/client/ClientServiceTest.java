@@ -5,7 +5,9 @@ import static org.mockito.ArgumentMatchers.*;
 import static com.bank.core.data.DataUtil.buildClientData;
 import static com.bank.core.data.DataUtil.buildClientDTOData;
 import static com.bank.core.data.DataUtil.buildPersonData;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.never;
 
 import com.bank.core.model.client.Client;
 import com.bank.core.model.client.ClientRepository;
@@ -44,9 +46,9 @@ class ClientServiceTest {
                 .thenReturn(buildClientData());
         when(clientMapper.entityToDTO(any(Client.class)))
                 .thenReturn(buildClientDTOData());
-        when(personRepository.saveAndFlush(any(Person.class)))
+        when(personRepository.save(any(Person.class)))
                 .thenReturn(buildPersonData());
-        when(clientRepository.saveAndFlush(any(Client.class)))
+        when(clientRepository.save(any(Client.class)))
                 .thenReturn(buildClientData());
         ClientDTO clientDTO = buildClientDTOData();
         ResponseEntity<ClientDTO> response = clientService.create(clientDTO);
@@ -54,8 +56,8 @@ class ClientServiceTest {
         assertThat(response.getBody()).isNotNull();
         verify(clientMapper).dtoToEntity(any(ClientDTO.class));
         verify(clientMapper).entityToDTO(any(Client.class));
-        verify(personRepository).saveAndFlush(any(Person.class));
-        verify(clientRepository).saveAndFlush(any(Client.class));
+        verify(personRepository).save(any(Person.class));
+        verify(clientRepository).save(any(Client.class));
     }
 
     @Test
@@ -66,7 +68,6 @@ class ClientServiceTest {
         ClientDTO clientDTO = buildClientDTOData();
         ResponseEntity<ClientDTO> response = clientService.create(clientDTO);
         assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.BAD_REQUEST)).isEqualTo(true);
-        assertThat(response.getBody()).isNotNull();
         verify(clientMapper).dtoToEntity(any(ClientDTO.class));
     }
 
@@ -126,16 +127,16 @@ class ClientServiceTest {
                 .thenReturn(Optional.of(client));
         when(clientMapper.entityToDTO(any(Client.class)))
                 .thenReturn(clientDTO);
-        when(personRepository.saveAndFlush(any(Person.class)))
+        when(personRepository.save(any(Person.class)))
                 .thenReturn(buildPersonData());
-        when(clientRepository.saveAndFlush(any(Client.class)))
+        when(clientRepository.save(any(Client.class)))
                 .thenReturn(client);
 
 
         ResponseEntity<ClientDTO> response = clientService.update(1L, clientDTO);
         verify(clientRepository).findById(anyLong());
-        verify(clientRepository).saveAndFlush(any(Client.class));
-        verify(personRepository).saveAndFlush(any(Person.class));
+        verify(clientRepository).save(any(Client.class));
+        verify(personRepository).save(any(Person.class));
         verify(clientMapper).entityToDTO(any(Client.class));
         assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.OK)).isEqualTo(true);
         assertThat(response.getBody()).isNotNull();

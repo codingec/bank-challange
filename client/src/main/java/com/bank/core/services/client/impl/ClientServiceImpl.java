@@ -6,6 +6,7 @@ import com.bank.core.model.person.Person;
 import com.bank.core.model.person.PersonRepository;
 import com.bank.core.services.client.ClientService;
 import com.bank.core.services.dto.ClientDTO;
+import com.bank.core.services.dto.response.ResponseDTO;
 import com.bank.core.services.mappers.ClientMapper;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -35,74 +36,107 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ResponseEntity<ClientDTO> create(ClientDTO clientDTO) {
         Client client = this.clientMapper.dtoToEntity(clientDTO);
-        Optional<Person> person = Optional.ofNullable(this.personRepository.saveAndFlush(client.getPerson()));
-        if(person.isPresent()){
+        log.info("Processing Service for clientIdentification={}, serviceMethod={}",
+                client.getPerson().getNationalId(), "create");
+        Optional<Person> person = Optional.ofNullable(this.personRepository.save(client.getPerson()));
+        if (person.isPresent()) {
             client.setPerson(person.get());
+            log.info("Valid request for clientIdentification={}, serviceMethod={}",
+                    client.getPerson().getNationalId(), "create");
             return new ResponseEntity<>(this.clientMapper.entityToDTO(
-                    Optional.of(this.clientRepository.saveAndFlush(client))
+                    Optional.of(this.clientRepository.save(client))
                             .get()), HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>( new ClientDTO(), HttpStatus.BAD_REQUEST);
+        } else {
+            log.info("Bad request for clientIdentification={}, serviceMethod={}",
+                    clientDTO.getPerson().getNationalId(), "create");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
     public ResponseEntity<List<ClientDTO>> getAll() {
         List<Client> client = this.clientRepository.findAll();
-        if(!client.isEmpty()){
+        log.info("Processing Service for all clients, serviceMethod={}", "getAll");
+        if (!client.isEmpty()) {
+            log.info("Valid request for for all clients, serviceMethod={}", "getAll");
             return new ResponseEntity<>(client
                     .stream()
                     .map(clientMapper::entityToDTO)
                     .toList(), HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
+        } else {
+            log.info("No content, serviceMethod={}", "getAll");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
     @Override
     public ResponseEntity<ClientDTO> getClientById(Long id) {
         Optional<Client> client = this.clientRepository.findById(id);
-        ClientDTO response;
-        if(client.isPresent()){
-            response = this.clientMapper.entityToDTO(client.get());
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(new ClientDTO(), HttpStatus.NO_CONTENT);
+        log.info("Processing Service to get client by id,  clientId={},  " +
+                "serviceMethod={}", id, "getClientById");
+        if (client.isPresent()) {
+            log.info("Valid get client by id,  clientId={}, " +
+                    " serviceMethod={}", id, "getClientById");
+            return new ResponseEntity<>(this.clientMapper.entityToDTO(client.get()),
+                    HttpStatus.OK);
+        } else {
+            log.info("No content,  clientId={}, " +
+                    " serviceMethod={}", id, "getClientById");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
     @Transactional
     @Override
     public ResponseEntity<ClientDTO> update(Long id, ClientDTO clientDTO) {
-        Optional<Client> clientData  = this.clientRepository.findById(id);
-        ClientDTO response;
-        if(clientData.isPresent()){
+        Optional<Client> clientData = this.clientRepository.findById(id);
+        log.info("Processing Service to update,  clientId={},  " +
+                "serviceMethod={}", id, "update");
+        if (clientData.isPresent()) {
             Person personUpdated = buildPerson(clientDTO, clientData.get().getPerson().getId());
-            Optional<Person> person = Optional.ofNullable(this.personRepository.saveAndFlush(personUpdated));
+            Optional<Person> person = Optional.ofNullable(this.personRepository.save(personUpdated));
             Client clientUpdated = buildClient(clientData.get().getId(), person.get(), clientDTO);
-            Optional<Client> client = Optional.ofNullable(this.clientRepository.saveAndFlush(clientUpdated));
-            response = this.clientMapper.entityToDTO(client.get());
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            Optional<Client> client = Optional.ofNullable(this.clientRepository.save(clientUpdated));
+            log.info("Valid update, clientId={},  " +
+                    "serviceMethod={}", id, "update");
+            return new ResponseEntity<>(this.clientMapper
+                    .entityToDTO(client.get()), HttpStatus.OK);
 
-        }else {
-            return new ResponseEntity<>(new ClientDTO(), HttpStatus.NO_CONTENT);
+        } else {
+            log.info("No content, clientId={},  " +
+                    "serviceMethod={}", id, "update");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
     @Transactional
     @Override
-    public void delete(Long id) {
-      Optional<Client> client =  this.clientRepository.findById(id);
-      if(client.isPresent()){
-          this.personRepository.delete(client.get().getPerson());
-          this.clientRepository.delete(client.get());
-      }
+    public ResponseEntity<ResponseDTO> delete(Long id) {
+        Optional<Client> client = this.clientRepository.findById(id);
+        log.info("Processing Service to delete,  clientId={},  " +
+                "serviceMethod={}", id, "delete");
+        if (client.isPresent()) {
+            String name = client.get().getPerson().getName();
+            this.clientRepository.delete(client.get());
+            this.personRepository.delete(client.get().getPerson());
+            log.info("Valid delete,  clientId={},  " +
+                    "serviceMethod={}", id, "delete");
+            return new ResponseEntity<>(ResponseDTO.builder()
+                    .message("Client " + name + " was deleted successfully")
+                    .build(), HttpStatus.OK);
+        } else {
+            log.info("No content, client Id={},  " +
+                    "serviceMethod={}", id, "delete");
+            return new ResponseEntity<>(ResponseDTO.builder()
+                    .message("Client does not exist")
+                    .build(), HttpStatus.NO_CONTENT);
+        }
 
     }
 
-    private Client buildClient(Long clientId, Person person, ClientDTO clientDTO){
+    private Client buildClient(Long clientId, Person person, ClientDTO clientDTO) {
         return Client.builder()
-                .id(clientId )
+                .id(clientId)
                 .person(person)
                 .password(clientDTO.getPassword())
                 .status(clientDTO.getStatus())

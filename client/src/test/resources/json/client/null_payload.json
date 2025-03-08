@@ -1,0 +1,12 @@
+{
+  "person": {
+    "name": null,
+    "gender": null,
+    "age": null,
+    "nationalId": null,
+    "address": null,
+    "telephone": null
+  },
+  "password": null,
+  "status": null
+}

@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  postgres:
+  bank_postgres:
     image: postgres:16
-    container_name: postgres
+    container_name: bank_postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -11,16 +11,16 @@ services:
     ports:
       - 5432:5432
 
-  client:
-    container_name: client
+  bank_client:
+    container_name: bank_client
     build:
       context: .
       dockerfile: client/Dockerfile
     ports:
       - "80:80"
    
-  account:
-    container_name: account
+  bank_account:
+    container_name: bank_account
     build:
       context: .
       dockerfile: account/Dockerfile
