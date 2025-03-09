@@ -67,7 +67,7 @@ class ClientServiceTest {
 
         ClientDTO clientDTO = buildClientDTOData();
         ResponseEntity<ClientDTO> response = clientService.create(clientDTO);
-        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.BAD_REQUEST)).isEqualTo(true);
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isEqualTo(true);
         verify(clientMapper).dtoToEntity(any(ClientDTO.class));
     }
 
@@ -91,7 +91,7 @@ class ClientServiceTest {
                 .thenReturn(client);
 
         ResponseEntity<List<ClientDTO>> response = clientService.getAll();
-        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT)).isTrue();
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isTrue();
         verify(clientRepository).findAll();
     }
 
@@ -115,7 +115,7 @@ class ClientServiceTest {
                 .thenReturn(Optional.empty());
 
         ResponseEntity<ClientDTO> response = clientService.getClientById(1L);
-        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT)).isTrue();
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isTrue();
         verify(clientRepository).findById(anyLong());
     }
 
@@ -149,7 +149,7 @@ class ClientServiceTest {
                 .thenReturn(Optional.empty());
         ClientDTO clientDTO = buildClientDTOData();
         ResponseEntity<ClientDTO> response = clientService.update(1L, clientDTO);
-        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT)).isTrue() ;
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isTrue() ;
     }
 
     @Test

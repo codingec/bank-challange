@@ -47,9 +47,9 @@ public class ClientServiceImpl implements ClientService {
                     Optional.of(this.clientRepository.save(client))
                             .get()), HttpStatus.OK);
         } else {
-            log.info("Bad request for clientIdentification={}, serviceMethod={}",
+            log.info("Not found for clientIdentification={}, serviceMethod={}",
                     clientDTO.getPerson().getNationalId(), "create");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -64,8 +64,8 @@ public class ClientServiceImpl implements ClientService {
                     .map(clientMapper::entityToDTO)
                     .toList(), HttpStatus.OK);
         } else {
-            log.info("No content, serviceMethod={}", "getAll");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            log.info("Not found, serviceMethod={}", "getAll");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -80,9 +80,9 @@ public class ClientServiceImpl implements ClientService {
             return new ResponseEntity<>(this.clientMapper.entityToDTO(client.get()),
                     HttpStatus.OK);
         } else {
-            log.info("No content,  clientId={}, " +
+            log.info("Not found,  clientId={}, " +
                     " serviceMethod={}", id, "getClientById");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -103,9 +103,9 @@ public class ClientServiceImpl implements ClientService {
                     .entityToDTO(client.get()), HttpStatus.OK);
 
         } else {
-            log.info("No content, clientId={},  " +
+            log.info("Not found, clientId={},  " +
                     "serviceMethod={}", id, "update");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -125,11 +125,11 @@ public class ClientServiceImpl implements ClientService {
                     .message("Client " + name + " was deleted successfully")
                     .build(), HttpStatus.OK);
         } else {
-            log.info("No content, client Id={},  " +
+            log.info("Not found, client Id={},  " +
                     "serviceMethod={}", id, "delete");
             return new ResponseEntity<>(ResponseDTO.builder()
                     .message("Client does not exist")
-                    .build(), HttpStatus.NO_CONTENT);
+                    .build(), HttpStatus.NOT_FOUND);
         }
 
     }

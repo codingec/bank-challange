@@ -43,9 +43,14 @@ public class MovementServiceImpl implements MovementService {
         Optional<Account> account= this.accountRepository.findById(movement.getAccount().getId());
         if(account.isPresent()) {
             Account accountToUpdate = account.get();
-            if(accountToUpdate.getInitialBalance()
-                    >= movementDTO.getTransferAmount()
-            && accountToUpdate.getStatus().equals(true)){
+            if(accountToUpdate.getStatus().equals(false)){
+                log.info("Not Valid request, Account disabled AccountNumber={}, serviceMethod={}",
+                        movementDTO.getAccount().getAccountNumber(), "create");
+                String message = "You cannot transfer to an enactive account:"+ accountToUpdate.getAccountNumber();
+                throw new BadRequest(message, new Throwable("You cannot transfer to an enactive account"));
+            }
+            if(accountToUpdate.getInitialBalance() >=
+                    movementDTO.getTransferAmount()){
                 accountToUpdate.setInitialBalance(accountToUpdate.getInitialBalance() -
                 movementDTO.getTransferAmount());
                 this.accountRepository.save(accountToUpdate);
@@ -56,25 +61,19 @@ public class MovementServiceImpl implements MovementService {
                         movementDTO.getAccount().getAccountNumber(), "create");
                 return new ResponseEntity<>( this.movementMapper.entityToDTO(
                         movement1.get()), HttpStatus.OK);
-            } else if(accountToUpdate.getStatus().equals(false)){
-                log.info("Not Valid request, Account disabled AccountNumber={}, serviceMethod={}",
-                        movementDTO.getAccount().getAccountNumber(), "create");
-                String message = "You cannot transfer to an enactive account:"+ accountToUpdate.getAccountNumber();
-                throw new BadRequest(message, new Throwable("You cannot transfer to an enactive account"));
-            }else {
+            }  else {
                 log.info("Not Valid request, Account insufficient funds AccountNumber={}, serviceMethod={}",
                         movementDTO.getAccount().getAccountNumber(), "create");
                 String message = "You have insufficient funds, your Balance is :"+ accountToUpdate.getInitialBalance()
                         +"  and your transaction is: " +movementDTO.getTransferAmount();
-
                 throw new BadRequest(message, new Throwable("You have insufficient funds"));
             }
-        }
-        log.info("Bad request, AccountNumber={}, serviceMethod={}",
+        }else{
+            log.info("Not found request, AccountNumber={}, serviceMethod={}",
                 movementDTO.getAccount().getAccountNumber(), "create");
-            return new ResponseEntity<>( new MovementDTO(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>( new MovementDTO(), HttpStatus.NOT_FOUND);
+       }
     }
-
 
     @Override
     public ResponseEntity<List<MovementDTO>> getAll() {
@@ -86,8 +85,8 @@ public class MovementServiceImpl implements MovementService {
                     .map(movementMapper::entityToDTO)
                     .toList(), HttpStatus.OK);
         }else {
-            log.info("No contend for, serviceMethod={}",  "getAll");
-           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            log.info("Not found for, serviceMethod={}",  "getAll");
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -100,8 +99,8 @@ public class MovementServiceImpl implements MovementService {
             return new ResponseEntity<>(this.movementMapper
                     .entityToDTO(movement.get()), HttpStatus.OK);
         }else{
-            log.info("No contend for, Id={}, serviceMethod={}",  id,"getMovementById");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            log.info("Not found for, Id={}, serviceMethod={}",  id,"getMovementById");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -116,24 +115,10 @@ public class MovementServiceImpl implements MovementService {
             log.info("Valid update Request for, id={id}, serviceMethod={}",  id,"update");
             return new ResponseEntity<>(this.movementMapper
                     .entityToDTO(updatedMovement.get()),HttpStatus.OK);
-
         }else {
-            log.info("No contend for update, Id={}, serviceMethod={}",  id,"update");
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            log.info("Not found for update, Id={}, serviceMethod={}",  id,"update");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    private static Movement buildMovement(MovementDTO movementDTO, Long movementId, Account account) {
-        return Movement.builder()
-                .id(movementId)
-                .account(account)
-                .movementType(movementDTO.getMovementType())
-                .receiverAccount(movementDTO.getReceiverAccount())
-                .receiverAccountType(movementDTO.getReceiverAccountType())
-                .transferAmount(movementDTO.getTransferAmount())
-                .transferDate(movementDTO.getTransferDate())
-                .updatedDate(createAValidDate(new Date()))
-                .build();
     }
 
     @Override
@@ -148,10 +133,23 @@ public class MovementServiceImpl implements MovementService {
                     .message("Movements for account:"+accountNumber+", transaction id "+id+" was deleted successfully")
                     .build(), HttpStatus.OK);
         }else {
-            log.info("No contend for delete, Id={}, serviceMethod={}",  id,"update");
+            log.info("Not found for delete, Id={}, serviceMethod={}",  id,"update");
             return new ResponseEntity<>(ResponseDTO.builder()
                     .message("Movements does not exist")
-                    .build(), HttpStatus.NO_CONTENT);
+                    .build(), HttpStatus.NOT_FOUND);
         }
+    }
+
+    private static Movement buildMovement(MovementDTO movementDTO, Long movementId, Account account) {
+        return Movement.builder()
+                .id(movementId)
+                .account(account)
+                .movementType(movementDTO.getMovementType())
+                .receiverAccount(movementDTO.getReceiverAccount())
+                .receiverAccountType(movementDTO.getReceiverAccountType())
+                .transferAmount(movementDTO.getTransferAmount())
+                .transferDate(movementDTO.getTransferDate())
+                .updatedDate(createAValidDate(new Date()))
+                .build();
     }
 }

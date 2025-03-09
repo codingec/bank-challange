@@ -9,18 +9,32 @@ import org.instancio.Instancio;
 public class DataUtil {
 
     public static AccountDTO buildAccountDTOData(){
-        return Instancio.of(AccountDTO.class).create();
+        AccountDTO accountDTO = Instancio.of(AccountDTO.class).create();
+        accountDTO.setAccountNumber("19752115563");
+        accountDTO.setInitialBalance(Double.valueOf("20000"));
+        accountDTO.setStatus(true);
+        return accountDTO;
     }
 
     public static Account buildAccountData(){
-        return Instancio.of(Account.class).create();
+        Account account = Instancio.of(Account.class).create();
+        account.setAccountNumber("19752115563");
+        account.setInitialBalance(Double.valueOf("20000"));
+        account.setStatus(true);
+        return account;
     }
 
     public static MovementDTO buildMovementDTOData(){
-        return Instancio.of(MovementDTO.class).create();
+        MovementDTO movementDTO = Instancio.of(MovementDTO.class).create();
+        movementDTO.setAccount(buildAccountDTOData());
+        movementDTO.setTransferAmount(Double.parseDouble("1000"));
+        return movementDTO;
     }
 
     public static Movement buildMovementData(){
-        return Instancio.of(Movement.class).create();
+        Movement movement = Instancio.of(Movement.class).create();
+        movement.setAccount(buildAccountData());
+        movement.setTransferAmount(Double.parseDouble("1000"));
+        return movement;
     }
 }

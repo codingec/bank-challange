@@ -40,9 +40,9 @@ public class AccountServiceImpl implements AccountService {
             return new ResponseEntity<>(this.accountMapper.entityToDTO(optionalAccount.get()),
                     HttpStatus.OK);
         } else {
-            log.info("No contend for create, AccountNumber={}, serviceMethod={}",
+            log.info("Not found for create, AccountNumber={}, serviceMethod={}",
                     accountDTO.getAccountNumber(), "update");
-            return new ResponseEntity<>(new AccountDTO(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new AccountDTO(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -56,8 +56,8 @@ public class AccountServiceImpl implements AccountService {
                     .map(accountMapper::entityToDTO)
                     .toList(), HttpStatus.OK);
         } else {
-            log.info("No contend for update, serviceMethod={}",  "getAll");
-            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NO_CONTENT);
+            log.info("Not found for update, serviceMethod={}",  "getAll");
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -70,8 +70,8 @@ public class AccountServiceImpl implements AccountService {
             return new ResponseEntity<>(this.accountMapper.entityToDTO(client.get()),
                     HttpStatus.OK);
         } else {
-            log.info("No contend for get by id, id={}, serviceMethod={}", id, "getAll");
-            return new ResponseEntity<>(new AccountDTO(), HttpStatus.BAD_REQUEST);
+            log.info("Not found for get by id, id={}, serviceMethod={}", id, "getAll");
+            return new ResponseEntity<>(new AccountDTO(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -87,8 +87,8 @@ public class AccountServiceImpl implements AccountService {
             return new ResponseEntity<>(this.accountMapper.entityToDTO(accountUpdated.get()),
                     HttpStatus.OK);
         } else {
-            log.info("No contend for update, id={}, serviceMethod={}", id, "update");
-            return new ResponseEntity<>(new AccountDTO(), HttpStatus.BAD_REQUEST);
+            log.info("Not found for update, id={}, serviceMethod={}", id, "update");
+            return new ResponseEntity<>(new AccountDTO(), HttpStatus.NOT_FOUND);
         }
     }
 
@@ -104,10 +104,10 @@ public class AccountServiceImpl implements AccountService {
                     .message("Account " + accountNumber + " was deleted successfully.")
                     .build(), HttpStatus.OK);
         } else {
-            log.info("No contend for delete, id={}, serviceMethod={}", id, "delete");
+            log.info("Not found for delete, id={}, serviceMethod={}", id, "delete");
             return new ResponseEntity<>(ResponseDTO.builder()
                     .message("Account does not exist")
-                    .build(), HttpStatus.NO_CONTENT);
+                    .build(), HttpStatus.NOT_FOUND);
         }
     }
 
