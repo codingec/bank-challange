@@ -46,8 +46,8 @@ public class MovementServiceImpl implements MovementService {
             if(accountToUpdate.getStatus().equals(false)){
                 log.info("Not Valid request, Account disabled AccountNumber={}, serviceMethod={}",
                         movementDTO.getAccount().getAccountNumber(), "create");
-                String message = "You cannot transfer to an enactive account:"+ accountToUpdate.getAccountNumber();
-                throw new BadRequest(message, new Throwable("You cannot transfer to an enactive account"));
+                String message = "No se puede transferir a una cuenta activa:"+ accountToUpdate.getAccountNumber();
+                throw new BadRequest(message, new Throwable("No se puede transferir a una cuenta activa"));
             }
             if(accountToUpdate.getInitialBalance() >=
                     movementDTO.getTransferAmount()){
@@ -64,14 +64,14 @@ public class MovementServiceImpl implements MovementService {
             }  else {
                 log.info("Not Valid request, Account insufficient funds AccountNumber={}, serviceMethod={}",
                         movementDTO.getAccount().getAccountNumber(), "create");
-                String message = "You have insufficient funds, your Balance is :"+ accountToUpdate.getInitialBalance()
-                        +"  and your transaction is: " +movementDTO.getTransferAmount();
-                throw new BadRequest(message, new Throwable("You have insufficient funds"));
+                String message = "No tiene fondos suficientes, su Saldo es :"+ accountToUpdate.getInitialBalance()
+                        +"  y su monto de transacción es: " +movementDTO.getTransferAmount();
+                throw new BadRequest(message, new Throwable("No tiene fondos suficientes"));
             }
         }else{
             log.info("Not found request, AccountNumber={}, serviceMethod={}",
                 movementDTO.getAccount().getAccountNumber(), "create");
-            return new ResponseEntity<>( new MovementDTO(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
        }
     }
 

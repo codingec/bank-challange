@@ -58,7 +58,7 @@ class MovementControllerTest {
         Thread.sleep(2000);
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("Create Response Body: " + responseBody);
-        assertThat(responseBody).contains("\"accountNumber\":\"68344669\"");
+        assertThat(responseBody).contains("\"numero_cuenta\":\"68344669\"");
     }
 
 
@@ -75,7 +75,7 @@ class MovementControllerTest {
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("GetAll Response Body: " + responseBody);
-        assertThat(responseBody).contains("\"accountNumber\":\"68344669\"");
+        assertThat(responseBody).contains("\"numero_cuenta\":\"68344669\"");
     }
 
     @Test
@@ -91,7 +91,7 @@ class MovementControllerTest {
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("Get by Client id Response Body: " + responseBody);
-        assertThat(responseBody).contains("\"accountNumber\":\"68344669\"");
+        assertThat(responseBody).contains("\"numero_cuenta\":\"68344669\"");
     }
 
     @Test

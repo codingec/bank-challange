@@ -20,7 +20,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "account")
+@Table(name = "cuenta")
 public class Account implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -30,20 +30,20 @@ public class Account implements Serializable {
     @Column(name = "cuenta_id", unique = true)
     private Long id;
 
-    @Column(name = "client_national_id", nullable = false)
+    @Column(name = "identificacion_cliente", nullable = false)
     private Long clientNationalId;
 
-    @Column(name = "account_number", length = 75, nullable = false)
+    @Column(name = "numero_cuenta", length = 75, nullable = false)
     private String accountNumber;
 
     @JsonSerialize(using = AccountTypeSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    @Column(name = "account_type", length = 50, nullable = false)
+    @Column(name = "tipo_cuenta", length = 50, nullable = false)
     private String accountType;
 
-    @Column(name = "initial_balance")
+    @Column(name = "saldo_inicial")
     private Double initialBalance;
 
-    @Column(name = "status")
+    @Column(name = "estado")
     private Boolean status;
 }

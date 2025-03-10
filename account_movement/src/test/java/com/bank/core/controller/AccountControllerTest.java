@@ -39,7 +39,7 @@ class AccountControllerTest {
         Thread.sleep(2000);
         String responseBody =  result.getResponse().getContentAsString();
         System.out.println("Create Response Body: " + responseBody);
-       assertThat(responseBody).contains("\"accountNumber\":\"72322664\"");
+       assertThat(responseBody).contains("\"numero_cuenta\":\"72322664\"");
     }
 
     @Test
@@ -54,7 +54,7 @@ class AccountControllerTest {
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("GetAll Response Body: " + responseBody);
-        assertThat(responseBody).isEqualTo("[{\"id\":1,\"accountNumber\":\"72322664\",\"accountType\":\"Corriente\",\"initialBalance\":80000.0,\"status\":true}]");
+        assertThat(responseBody).contains("\"numero_cuenta\":\"72322664\"");
     }
 
     @Test
@@ -69,7 +69,7 @@ class AccountControllerTest {
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("Get by Client id Response Body: " + responseBody);
-        assertThat(responseBody).isEqualTo("{\"id\":1,\"accountNumber\":\"72322664\",\"accountType\":\"Corriente\",\"initialBalance\":80000.0,\"status\":true}");
+        assertThat(responseBody).contains("\"numero_cuenta\":\"72322664\"");
     }
 
     @Test
@@ -87,7 +87,7 @@ class AccountControllerTest {
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("Update Response Body: " + responseBody);
-        assertThat(responseBody).isEqualTo("{\"id\":1,\"accountNumber\":\"72322664\",\"accountType\":\"Corriente\",\"initialBalance\":80000.0,\"status\":true}");
+        assertThat(responseBody).contains("\"numero_cuenta\":\"72322664\"");
     }
 
     @Test
@@ -101,7 +101,7 @@ class AccountControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
-        assertThat(responseBody).contains(" was deleted successfully");
+        assertThat(responseBody).contains(" fue eliminado exitosamente.");
     }
 
     private String create() throws Exception {

@@ -1,8 +1,6 @@
 -- public.persona definition
 
--- Drop table
 
--- DROP TABLE public.persona;
 
 CREATE TABLE public.persona (
 	edad int4 NOT NULL,
@@ -27,7 +25,5 @@ CREATE TABLE public.cliente (
 	CONSTRAINT cliente_pkey PRIMARY KEY (client_id)
 );
 
-
--- public.cliente foreign keys
 
 ALTER TABLE public.cliente ADD CONSTRAINT fk_cliente_persona_id_key FOREIGN KEY (persona_id) REFERENCES public.persona(persona_id);

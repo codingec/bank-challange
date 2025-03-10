@@ -26,39 +26,39 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "movement")
+@Table(name = "movimientos")
 public class Movement implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "movement_id", unique = true)
+    @Column(name = "movimiento_id", unique = true)
     private Long id;
 
     @ManyToOne()
-    @JoinColumn(name="account_id", nullable=false)
+    @JoinColumn(name="cuenta_id", nullable=false)
     private Account account;
 
-    @Column(name = "movement_type",length = 50, nullable = false)
+    @Column(name = "tipo_movimiento",length = 50, nullable = false)
     private String movementType;
 
-    @Column(name = "receiver_account", length = 50, nullable = false)
+    @Column(name = "cuenta_receptora", length = 50, nullable = false)
     private String receiverAccount;
 
 
-    @Column(name = "receiver_account_type", length = 50, nullable = false)
+    @Column(name = "tipo_cuenta_receptora", length = 50, nullable = false)
     private String receiverAccountType;
 
-    @Column(name = "transfer_amount")
+    @Column(name = "valor_transferencia")
     private Double transferAmount;
 
-    @Column(name = "transfer_date", length = 5, nullable = false)
+    @Column(name = "fecha_transferencia", length = 5, nullable = false)
     private Date transferDate;
 
-    @Column(name = "created_date", nullable = true)
+    @Column(name = "fecha_creacion", nullable = true)
     private Date createdDate;
 
-    @Column(name = "updated_date", nullable = true)
+    @Column(name = "fecha_actualizada", nullable = true)
     private Date updatedDate;
 }

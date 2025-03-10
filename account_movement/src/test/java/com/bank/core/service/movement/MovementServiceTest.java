@@ -79,7 +79,7 @@ class MovementServiceTest {
                 .thenReturn(Optional.of(account1));
         assertThatThrownBy(() -> movementService.create(movementDTO))
                 .isInstanceOf(BadRequest.class)  // Replace with actual exception type
-                .hasMessage("You cannot transfer to an enactive account:19752115563") // Ensure the exact message matches
+                .hasMessage("No se puede transferir a una cuenta activa:19752115563") // Ensure the exact message matches
                 .hasCauseInstanceOf(Throwable.class);
         verify(movementMapper).dtoToEntity(any(MovementDTO.class));
         verify(accountRepository).findById(anyLong());
@@ -101,7 +101,7 @@ class MovementServiceTest {
                 .thenReturn(Optional.of(account1));
         assertThatThrownBy(() -> movementService.create(movementDTO))
                 .isInstanceOf(BadRequest.class)  // Replace with actual exception type
-                .hasMessage("You have insufficient funds, your Balance is :5.0  and your transaction is: 1000.0") // Ensure the exact message matches
+                .hasMessage("No tiene fondos suficientes, su Saldo es :5.0  y su monto de transacción es: 1000.0") // Ensure the exact message matches
                 .hasCauseInstanceOf(Throwable.class);
         verify(movementMapper).dtoToEntity(any(MovementDTO.class));
         verify(accountRepository).findById(anyLong());

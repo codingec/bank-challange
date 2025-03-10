@@ -1,15 +1,15 @@
 {
-  "account": {
+  "cuenta": {
     "id": 3,
-    "clientNationalId": 1,
-    "accountNumber": "68344669",
-    "accountType": "Ahorro",
-    "initialBalance": 80000.0,
-    "status": true
+    "identificacion_cliente": 1,
+    "numero_cuenta": "68344669",
+    "tipo_cuenta": "Ahorro",
+    "saldo_inicial": 80000.0,
+    "estado": true
   },
-  "movementType": "Deposito",
-  "receiverAccount": "2818265546",
-  "receiverAccountType": "Corriente",
-  "transferAmount": 200,
-  "transferDate": "2025-03-07 18:18:00"
+  "tipo_movimiento": "Deposito",
+  "cuenta_receptora": "2818265546",
+  "tipo_cuenta_receptora": "Corriente",
+  "valor": 200,
+  "fecha_transferencia": "2025-03-07 18:18:00"
 }

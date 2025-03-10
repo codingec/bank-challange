@@ -71,7 +71,7 @@ public class AccountServiceImpl implements AccountService {
                     HttpStatus.OK);
         } else {
             log.info("Not found for get by id, id={}, serviceMethod={}", id, "getAll");
-            return new ResponseEntity<>(new AccountDTO(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -88,7 +88,7 @@ public class AccountServiceImpl implements AccountService {
                     HttpStatus.OK);
         } else {
             log.info("Not found for update, id={}, serviceMethod={}", id, "update");
-            return new ResponseEntity<>(new AccountDTO(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -101,12 +101,12 @@ public class AccountServiceImpl implements AccountService {
             this.accountRepository.delete(account.get());
             log.info("Valid delete request for, id={}, serviceMethod={}", id, "delete");
             return new ResponseEntity<>(ResponseDTO.builder()
-                    .message("Account " + accountNumber + " was deleted successfully.")
+                    .message("Cuenta " + accountNumber + " fue eliminado exitosamente.")
                     .build(), HttpStatus.OK);
         } else {
             log.info("Not found for delete, id={}, serviceMethod={}", id, "delete");
             return new ResponseEntity<>(ResponseDTO.builder()
-                    .message("Account does not exist")
+                    .message("Cuenta no existe")
                     .build(), HttpStatus.NOT_FOUND);
         }
     }
