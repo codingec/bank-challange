@@ -46,6 +46,7 @@ public class MovementDTO implements Serializable {
 
     private Double transferAmount;
 
+
     @JsonSerialize(using = DateSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Date transferDate;

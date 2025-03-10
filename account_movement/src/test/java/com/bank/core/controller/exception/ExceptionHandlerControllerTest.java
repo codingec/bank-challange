@@ -23,20 +23,30 @@ class ExceptionHandlerControllerTest {
     @LocalServerPort
     private int port;
 
-    static String CREATE_JSON_PAYLOAD = "json/account/null_payload.json";
+    static String NOT_FOUND_JSON_PAYLOAD = "json/movement/notfound_payload.json";
 
     @Test
-    void givenValidDataToCreateClient_thenSuccess_500() throws Exception {
-        String clientPayload = getDataStringFromJsonFile(CREATE_JSON_PAYLOAD);
+    void givenValidDataToCreateAccount_thenSuccess_500() throws Exception {
         mockMvc.perform(
                         post("/api/cuentas")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
-                                .content(clientPayload)
                 )
                 .andExpect(status().is5xxServerError());
 
     }
 
+    @Test
+    void givenValidDataToCreateMovement_thenSuccess_400() throws Exception {
+        String clientPayload = getDataStringFromJsonFile(NOT_FOUND_JSON_PAYLOAD);
+        mockMvc.perform(
+                        post("/api/movimientos")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .content(clientPayload)
+                )
+                .andExpect(status().is4xxClientError());
+
+    }
 
 }

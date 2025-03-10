@@ -1,15 +1,14 @@
 {
   "account": {
-    "id": 3,
-    "clientNationalId": 1,
-    "accountNumber": "68344669",
+    "id": 1,
+    "clientNationalId": 2,
+    "accountNumber": "",
     "accountType": "Ahorro",
-    "initialBalance": 80000.0,
+    "initialBalance": 0,
     "status": true
   },
   "movementType": "Deposito",
   "receiverAccount": "2818265546",
   "receiverAccountType": "Corriente",
-  "transferAmount": 200,
-  "transferDate": " "
+  "transferAmount": 200
 }

@@ -9,7 +9,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
 
-@Profile({"production", "test"})
+//@Profile({"production", "test"})
 @ControllerAdvice
 public class ExceptionHandlerController {
 
