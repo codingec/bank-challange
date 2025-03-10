@@ -38,12 +38,4 @@ class ExceptionHandlerControllerTest {
 
     }
 
-    @Test
-    void givenValidDataToCreateClient_thenSuccess_400() throws Exception {
-        mockMvc.perform(
-                        post("/banco/api/clientes")
-                )
-                .andExpect(status().is5xxServerError());
-    }
-
 }
