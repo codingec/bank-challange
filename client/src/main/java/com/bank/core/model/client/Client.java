@@ -25,7 +25,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "client")
+@Table(name = "cliente")
 public class Client implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -36,7 +36,7 @@ public class Client implements Serializable {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name="person_id", nullable=false)
+    @JoinColumn(name="persona_id", nullable=false)
     private Person person;
 
     @Column(name = "password", length = 30, nullable = false)

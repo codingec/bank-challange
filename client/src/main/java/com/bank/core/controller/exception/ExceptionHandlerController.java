@@ -15,9 +15,9 @@ public class ExceptionHandlerController {
     public ResponseEntity<ExceptionResponse> handleGlobalException(Exception ex, WebRequest request) {
         return new ResponseEntity<>(
                 ExceptionResponse.builder()
-                        .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                        .type("Internal Server Error")
-                        .message("An error occurred: " + ex.getMessage())
+                        .codigo(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .tipo("Error Interno del Servidor")
+                        .mensaje("Se produjo un error: " + ex.getMessage())
                         .build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

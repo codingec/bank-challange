@@ -41,7 +41,7 @@ class ClientControllerTest {
         Thread.sleep(2000);
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("Create Response Body: " + responseBody);
-        assertThat(responseBody).contains("\"nationalId\":\"1111122221\"");
+        assertThat(responseBody).contains("\"identificacion\":\"111291234521\"");
     }
 
 
@@ -56,7 +56,7 @@ class ClientControllerTest {
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("GetAll Response Body: " + responseBody);
-        assertThat(responseBody).contains("\"nationalId\":\"1111122221\"");
+        assertThat(responseBody).contains("\"identificacion\":\"111291234521\"");
     }
 
     @Test
@@ -70,7 +70,7 @@ class ClientControllerTest {
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("Get by Client id Response Body: " + responseBody);
-        assertThat(responseBody).contains("\"nationalId\":\"1111122221\"");
+        assertThat(responseBody).contains("\"identificacion\":\"111291234521\"");
     }
 
     @Test
@@ -86,7 +86,7 @@ class ClientControllerTest {
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
         System.out.println("Update Response Body: " + responseBody);
-        assertThat(responseBody).contains("\"name\":\"Anatoly\"");
+        assertThat(responseBody).contains("\"nombre\":\"Anatoly\"");
     }
 
     @Test
@@ -99,6 +99,6 @@ class ClientControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
         String responseBody = result.getResponse().getContentAsString();
-        assertThat(responseBody).contains(" was deleted successfully");
+        assertThat(responseBody).contains(" fue eliminado exitosamente.");
     }
 }

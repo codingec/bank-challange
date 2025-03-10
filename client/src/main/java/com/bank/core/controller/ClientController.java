@@ -36,7 +36,7 @@ public class ClientController implements ClientApi {
     @PostMapping
     public ResponseEntity<ClientDTO> create(@Valid @RequestBody ClientDTO clientDto) {
         log.info("Processing Create request for clientIdentification={}, endpointMethod={}",
-                clientDto.getPerson().getNationalId(), "create");
+                clientDto.getPersona().getNationalId(), "create");
         return this.clientService.create(clientDto);
     }
 
@@ -57,7 +57,7 @@ public class ClientController implements ClientApi {
     @PutMapping("/{id}")
     public ResponseEntity<ClientDTO> update(@PathVariable Long id, @Valid @RequestBody ClientDTO clientDto) {
         log.info("Processing update request for clientId={}, clientIdentification={}, endpointMethod={}",
-                id, clientDto.getPerson().getNationalId(), "update");
+                id, clientDto.getPersona().getNationalId(), "update");
         return this.clientService.update(id, clientDto);
     }
 

@@ -26,6 +26,6 @@ public class ResponseDTO implements Serializable {
     private Long id;
 
     @NotEmpty
-    private String message;
+    private String mensaje;
 
 }

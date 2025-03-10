@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 public interface ClientMapper {
 
     @Mapping(target = "password", ignore = true)
+    @Mapping(source = "person", target = "persona")
     ClientDTO entityToDTO(Client client);
 
+    @Mapping(source = "persona", target = "person")
     Client dtoToEntity(ClientDTO clientDTO);
 }

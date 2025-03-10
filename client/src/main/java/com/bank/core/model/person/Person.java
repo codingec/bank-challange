@@ -22,31 +22,31 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "person")
+@Table(name = "persona")
 public class Person implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id", unique = true)
+    @Column(name = "persona_id", unique = true)
     private Long id;
 
-    @Column(name = "name", length = 50, nullable = false)
+    @Column(name = "nombre", length = 50, nullable = false)
     private String name;
 
-    @Column(name = "gender", nullable = false)
+    @Column(name = "genero", nullable = false)
     private String gender;
 
-    @Column(name = "age", nullable = false)
+    @Column(name = "edad", nullable = false)
     private Integer age;
 
-    @Column(name = "nationalId", length = 15, nullable = false,  unique = true)
+    @Column(name = "identificacion", length = 15, nullable = false,  unique = true)
     private String nationalId;
 
-    @Column(name = "address", length = 100, nullable = false)
+    @Column(name = "direccion", length = 100, nullable = false)
     private String address;
 
-    @Column(name = "telephone", length = 20, nullable = false)
+    @Column(name = "telefono", length = 20, nullable = false)
     private String telephone;
 }

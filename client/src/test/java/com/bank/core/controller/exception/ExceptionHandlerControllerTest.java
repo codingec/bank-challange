@@ -37,5 +37,4 @@ class ExceptionHandlerControllerTest {
                 .andExpect(status().is5xxServerError());
 
     }
-
 }

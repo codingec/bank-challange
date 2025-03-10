@@ -18,7 +18,7 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ExceptionResponse implements Serializable {
-    private int code;
-    private String type;
-    private String message;
+    private int codigo;
+    private String tipo;
+    private String mensaje;
 }

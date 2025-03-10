@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,7 +47,7 @@ public class ClientServiceImpl implements ClientService {
                             .get()), HttpStatus.OK);
         } else {
             log.info("Not found for clientIdentification={}, serviceMethod={}",
-                    clientDTO.getPerson().getNationalId(), "create");
+                    clientDTO.getPersona().getNationalId(), "create");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -122,13 +121,13 @@ public class ClientServiceImpl implements ClientService {
             log.info("Valid delete,  clientId={},  " +
                     "serviceMethod={}", id, "delete");
             return new ResponseEntity<>(ResponseDTO.builder()
-                    .message("Client " + name + " was deleted successfully")
+                    .mensaje("Cliente " + name + " fue eliminado exitosamente.")
                     .build(), HttpStatus.OK);
         } else {
             log.info("Not found, client Id={},  " +
                     "serviceMethod={}", id, "delete");
             return new ResponseEntity<>(ResponseDTO.builder()
-                    .message("Client does not exist")
+                    .mensaje("Cliente no existe.")
                     .build(), HttpStatus.NOT_FOUND);
         }
 
@@ -146,12 +145,12 @@ public class ClientServiceImpl implements ClientService {
     private Person buildPerson(ClientDTO clientDTO, Long personId) {
         return Person.builder()
                 .id(personId)
-                .name(clientDTO.getPerson().getName())
-                .gender(clientDTO.getPerson().getGender())
-                .age(clientDTO.getPerson().getAge())
-                .nationalId(clientDTO.getPerson().getNationalId())
-                .address(clientDTO.getPerson().getAddress())
-                .telephone(clientDTO.getPerson().getTelephone())
+                .name(clientDTO.getPersona().getName())
+                .gender(clientDTO.getPersona().getGender())
+                .age(clientDTO.getPersona().getAge())
+                .nationalId(clientDTO.getPersona().getNationalId())
+                .address(clientDTO.getPersona().getAddress())
+                .telephone(clientDTO.getPersona().getTelephone())
                 .build();
     }
 }
