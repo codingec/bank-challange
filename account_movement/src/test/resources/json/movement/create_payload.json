@@ -1,10 +1,10 @@
 {
   "account": {
-    "id": 1,
+    "id": 3,
     "clientNationalId": 1,
-    "accountNumber": "72322664",
-    "accountType": "Corriente",
-    "initialBalance": 20000.0,
+    "accountNumber": "68344669",
+    "accountType": "Ahorro",
+    "initialBalance": 80000.0,
     "status": true
   },
   "movementType": "Transferencia",

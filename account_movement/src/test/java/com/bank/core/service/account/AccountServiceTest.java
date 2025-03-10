@@ -105,7 +105,7 @@ class AccountServiceTest {
         when(accountRepository.findById(anyLong()))
                 .thenReturn(Optional.empty());
         ResponseEntity<AccountDTO> response = accountService.getAccountById(1L);
-        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.BAD_REQUEST)).isEqualTo(true);
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isEqualTo(true);
         verify(accountRepository).findById(anyLong());
     }
 
@@ -130,7 +130,7 @@ class AccountServiceTest {
         when(accountRepository.findById(anyLong()))
                 .thenReturn(Optional.empty());
         ResponseEntity<AccountDTO> response = accountService.getAccountById(1L);
-        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.BAD_REQUEST)).isEqualTo(true);
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isEqualTo(true);
         verify(accountRepository).findById(any());
     }
 
@@ -150,7 +150,7 @@ class AccountServiceTest {
         when(accountRepository.findById(anyLong()))
                 .thenReturn(Optional.empty());
         ResponseEntity<ResponseDTO> response = accountService.delete(1L);
-        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT)).isEqualTo(true);
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isEqualTo(true);
         verify(accountRepository).findById(any());
     }
 }
