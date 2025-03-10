@@ -85,6 +85,8 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
+
+
     @Transactional
     @Override
     public ResponseEntity<ClientDTO> update(Long id, ClientDTO clientDTO) {
@@ -131,6 +133,24 @@ public class ClientServiceImpl implements ClientService {
                     .build(), HttpStatus.NOT_FOUND);
         }
 
+    }
+
+    @Override
+    public ResponseEntity<ClientDTO> getClientByNationalId(Long identificacion) {
+        String nationalId = Long.toString(identificacion);
+        Optional<Client> client=  this.clientRepository.findByClientNationalId(nationalId);
+        log.info("Processing Service to get client by nationalId,  nationalId={},  " +
+                "serviceMethod={}", identificacion, "getClientByNationalId");
+        if (client.isPresent()) {
+            log.info("Valid get client by nationalId,  nationalId={}, " +
+                    " serviceMethod={}", identificacion, "getClientByNationalId");
+            return new ResponseEntity<>(this.clientMapper.entityToDTO(client.get()),
+                    HttpStatus.OK);
+        } else {
+            log.info("Not found,  nationalId={}, " +
+                    " serviceMethod={}", identificacion, "getClientByNationalId");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     private Client buildClient(Long clientId, Person person, ClientDTO clientDTO) {

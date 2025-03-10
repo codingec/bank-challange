@@ -172,4 +172,28 @@ class ClientServiceTest {
         verify(clientRepository).findById(anyLong());
         verify(clientRepository, never()).delete(any(Client.class));
     }
+
+    @Test
+    void givenValidDataToGetClientNationalId_thenSuccess_200_ok() {
+        Client client = buildClientData();
+        when(clientRepository.findByClientNationalId(anyString()))
+                .thenReturn(Optional.of(client));
+        when(clientMapper.entityToDTO(any(Client.class)))
+                .thenReturn(buildClientDTOData());
+        ResponseEntity<ClientDTO> response = clientService.getClientByNationalId(111291234521L);
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.OK)).isEqualTo(true);
+        assertThat(response.getBody()).isNotNull();
+        verify(clientRepository).findByClientNationalId(anyString());
+        verify(clientMapper).entityToDTO(any(Client.class));
+    }
+
+    @Test
+    void givenValidDataToGetClientNationalId_thenSuccess_400_ok() {
+        when(clientRepository.findByClientNationalId(anyString()))
+                .thenReturn(Optional.empty());
+
+        ResponseEntity<ClientDTO> response = clientService.getClientByNationalId(1L);
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isTrue();
+        verify(clientRepository).findByClientNationalId(anyString());
+    }
 }

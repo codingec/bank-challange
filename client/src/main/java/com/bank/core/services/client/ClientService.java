@@ -12,4 +12,5 @@ public interface ClientService {
     ResponseEntity<ClientDTO> getClientById(Long id);
     ResponseEntity<ClientDTO> update(Long id, ClientDTO clientDTO);
     ResponseEntity<ResponseDTO> delete(Long id);
+    ResponseEntity<ClientDTO> getClientByNationalId(Long identificacion);
 }
