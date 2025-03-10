@@ -2,6 +2,8 @@ package com.bank.core.data;
 
 import com.bank.core.model.account.Account;
 import com.bank.core.model.movement.Movement;
+import com.bank.core.services.consumer.client.response.ClientDTO;
+import com.bank.core.services.consumer.client.response.PersonDTO;
 import com.bank.core.services.dto.AccountDTO;
 import com.bank.core.services.dto.MovementDTO;
 import org.instancio.Instancio;
@@ -36,5 +38,13 @@ public class DataUtil {
         movement.setAccount(buildAccountData());
         movement.setTransferAmount(Double.parseDouble("1000"));
         return movement;
+    }
+
+    public static ClientDTO buildClientDTOData(){
+        return Instancio.of(ClientDTO.class).create();
+    }
+
+    public static PersonDTO buildPersonDTOData(){
+        return Instancio.of(PersonDTO.class).create();
     }
 }

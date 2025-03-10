@@ -1,10 +1,9 @@
 package com.bank.core.services.dto;
 
+import com.bank.core.services.consumer.client.response.ClientDTO;
 import com.bank.core.util.serialize.AccountTypeSerializer;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.bank.core.util.serialize.BooleanTypeSerializer;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -34,6 +33,8 @@ public class AccountDTO implements Serializable {
     @JsonProperty("identificacion_cliente")
     private Long clientNationalId;
 
+    private ClientDTO cliente;
+
     @NotEmpty
     @JsonProperty("numero_cuenta")
     @Size(min = 2, max= 20, message = "Por favor insertar una cuenta correcto.")
@@ -50,5 +51,6 @@ public class AccountDTO implements Serializable {
     private Double initialBalance;
 
     @JsonProperty("estado")
+    @JsonSerialize(using = BooleanTypeSerializer.class)
     private Boolean status;
 }

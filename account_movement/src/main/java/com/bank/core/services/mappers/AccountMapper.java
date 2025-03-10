@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 @Mapper(componentModel = "spring")
 @Component
 public interface AccountMapper {
-    @Mapping(target = "clientNationalId", ignore = true)
+
+    @Mapping(target = "cliente", ignore = true)
     AccountDTO entityToDTO(Account account);
+
 
     Account dtoToEntity(AccountDTO accountDTO);
 }

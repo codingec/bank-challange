@@ -2,15 +2,19 @@ package com.bank.core.service.account;
 
 import static com.bank.core.data.DataUtil.buildAccountData;
 import static com.bank.core.data.DataUtil.buildAccountDTOData;
+import static com.bank.core.data.DataUtil.buildClientDTOData;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.bank.core.controller.exception.BadRequest;
 import com.bank.core.model.account.Account;
 import com.bank.core.model.account.AccountRepository;
 import com.bank.core.services.account.impl.AccountServiceImpl;
+import com.bank.core.services.consumer.client.ClientRestConsumerService;
+import com.bank.core.services.consumer.client.response.ClientDTO;
 import com.bank.core.services.dto.AccountDTO;
 import com.bank.core.services.dto.response.ResponseDTO;
 import com.bank.core.services.mappers.AccountMapper;
@@ -35,6 +39,8 @@ class AccountServiceTest {
     @Mock
     AccountRepository accountRepository;
     @Mock
+    ClientRestConsumerService restConsumerService;
+    @Mock
     AccountMapper accountMapper;
 
 
@@ -42,6 +48,8 @@ class AccountServiceTest {
     void givenValidDataToCreateAnAccount_thenSuccess_200_ok() {
         Account account =buildAccountData();
         AccountDTO accountDTO =buildAccountDTOData();
+        when(restConsumerService.restConsumer(anyString()))
+                .thenReturn(Optional.of(buildClientDTOData()));
         when(accountMapper.dtoToEntity(any(AccountDTO.class)))
                 .thenReturn(account);
         when(accountRepository.save(any(Account.class)))
@@ -58,15 +66,19 @@ class AccountServiceTest {
 
     @Test
     void givenInValidDataToCreateAnAccount_thenSuccess_400_ok() {
-        ResponseEntity<AccountDTO> response = accountService.create(new AccountDTO());
+        AccountDTO accountDTO =buildAccountDTOData();
+        when(restConsumerService.restConsumer(anyString()))
+                .thenReturn(Optional.of(buildClientDTOData()));
+        ResponseEntity<AccountDTO> response = accountService.create(accountDTO);
         assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isEqualTo(true);
-        assertThat(response.getBody()).isNotNull();
         verify(accountMapper).dtoToEntity(any(AccountDTO.class));
     }
 
     @Test
     void givenValidDataToGetAllAccounts_thenSuccess_200_ok() {
         List<Account> accountList = new ArrayList<>();
+        when(restConsumerService.restConsumer(anyString()))
+                .thenReturn(Optional.of(buildClientDTOData()));
         accountList.add(buildAccountData());
         when(accountMapper.entityToDTO(any(Account.class)))
                 .thenReturn(buildAccountDTOData());
@@ -92,6 +104,8 @@ class AccountServiceTest {
     void givenValidDataToGetByIdAccounts_thenSuccess_200_ok() {
         when(accountMapper.entityToDTO(any(Account.class)))
                 .thenReturn(buildAccountDTOData());
+        when(restConsumerService.restConsumer(anyString()))
+                .thenReturn(Optional.of(buildClientDTOData()));
         when(accountRepository.findById(anyLong()))
                 .thenReturn(Optional.of(buildAccountData()));
         ResponseEntity<AccountDTO> response = accountService.getAccountById(1L);
@@ -112,6 +126,8 @@ class AccountServiceTest {
     @Test
     void givenValidDataToUpdateAccount_thenSuccess_200_ok() {
         AccountDTO accountDTO =buildAccountDTOData();
+        when(restConsumerService.restConsumer(anyString()))
+                .thenReturn(Optional.of(buildClientDTOData()));
         when(accountMapper.entityToDTO(any(Account.class)))
                 .thenReturn(accountDTO);
         when(accountRepository.findById(anyLong()))
@@ -152,5 +168,42 @@ class AccountServiceTest {
         ResponseEntity<ResponseDTO> response = accountService.delete(1L);
         assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isEqualTo(true);
         verify(accountRepository).findById(any());
+    }
+
+    @Test
+    void givenValidDataToClient_thenSuccess_200_ok() {
+        when(restConsumerService.restConsumer(anyString()))
+                .thenReturn(Optional.of(buildClientDTOData()));
+        Optional<ClientDTO> response = accountService.getClientDetails(1L);
+        assertThat(response.isPresent()).isEqualTo(true);
+        verify(restConsumerService).restConsumer(anyString());
+    }
+
+    @Test
+    void givenInValidDataToClientDoesNotExist_thenSuccess_400_ok() {
+        AccountDTO accountDTO =buildAccountDTOData();
+        accountDTO.setClientNationalId(1234L);
+        when(restConsumerService.restConsumer(anyString()))
+                .thenThrow(new BadRequest("Cliente no existe: 1234" , new Throwable("Cliente no existe")));
+
+        assertThatThrownBy(() -> accountService.getClientDetails(1l))
+                .isInstanceOf(BadRequest.class) // Verify the exception type
+                .hasMessage("Cliente no existe: 1234");
+
+    }
+
+
+
+    @Test
+    void givenInValidDataToBadRequestClientDoesNotExist_thenSuccess_400_ok() {
+        AccountDTO accountDTO =buildAccountDTOData();
+        accountDTO.setClientNationalId(1234L);
+        when(restConsumerService.restConsumer(anyString()))
+                .thenThrow(new BadRequest("Cliente no existe: 1234" , new Throwable("Cliente no existe")));
+
+        assertThatThrownBy(() -> accountService.create(accountDTO))
+                .isInstanceOf(BadRequest.class) // Verify the exception type
+                .hasMessage("Cliente no existe: 1234");
+
     }
 }
