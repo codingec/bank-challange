@@ -1,12 +1,7 @@
 {
-  "person": {
-    "name": null,
-    "gender": null,
-    "age": null,
-    "nationalId": null,
-    "address": null,
-    "telephone": null
-  },
-  "password": null,
+  "clientNationalId": null,
+  "accountNumber": null,
+  "accountType": null,
+  "initialBalance": null,
   "status": null
 }

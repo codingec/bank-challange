@@ -1,0 +1,15 @@
+{
+  "account": {
+    "id": null,
+    "clientNationalId": null,
+    "accountNumber": null,
+    "accountType": null,
+    "initialBalance": null,
+    "status": null
+  },
+  "movementType": null,
+  "receiverAccount": null,
+  "receiverAccountType": null,
+  "transferAmount": null,
+  "transferDate": null
+}

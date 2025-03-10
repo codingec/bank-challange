@@ -1,0 +1,15 @@
+{
+  "account": {
+    "id": 1,
+    "clientNationalId": 1,
+    "accountNumber": "72322664",
+    "accountType": "Corriente",
+    "initialBalance": 20000.0,
+    "status": true
+  },
+  "movementType": "Transferencia",
+  "receiverAccount": "2818265546",
+  "receiverAccountType": "Ahorro",
+  "transferAmount": 200,
+  "transferDate": "2025-03-07 18:18:00"
+}

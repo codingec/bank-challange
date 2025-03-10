@@ -7,6 +7,7 @@ import com.bank.core.model.movement.Movement;
 import com.bank.core.model.movement.MovementRepository;
 import com.bank.core.services.dto.AccountDTO;
 import com.bank.core.services.dto.MovementDTO;
+import com.bank.core.services.dto.response.ResponseDTO;
 import com.bank.core.services.mappers.MovementMapper;
 import com.bank.core.services.movement.impl.MovementServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -204,6 +205,28 @@ class MovementServiceTest {
         when(movementRepository.findById(anyLong()))
                 .thenReturn(Optional.empty());
         ResponseEntity<MovementDTO> response = movementService.update(1L, movementDTO);
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isEqualTo(true);
+        verify(movementRepository).findById(anyLong());
+
+    }
+//DELETE
+    @Test
+    void givenValidDataToDeleteAnAccount_thenSuccess_200_ok() {
+        Movement movement = buildMovementData();
+        when(movementRepository.findById(anyLong()))
+                .thenReturn(Optional.of(movement));
+        ResponseEntity<ResponseDTO> response = movementService.delete(1L);
+        assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.OK)).isEqualTo(true);
+        assertThat(response.getBody()).isNotNull();
+        verify(movementRepository).delete(any());
+
+    }
+
+    @Test
+    void givenInValidDataToDeleteAnAccount_thenSuccess_400_not_found() {
+        when(movementRepository.findById(anyLong()))
+                .thenReturn(Optional.empty());
+        ResponseEntity<ResponseDTO> response = movementService.delete(1L);
         assertThat(response.getStatusCode().isSameCodeAs(HttpStatus.NOT_FOUND)).isEqualTo(true);
         verify(movementRepository).findById(anyLong());
 

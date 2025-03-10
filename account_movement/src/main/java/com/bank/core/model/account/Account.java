@@ -33,7 +33,7 @@ public class Account implements Serializable {
     @Column(name = "client_national_id", nullable = false)
     private Long clientNationalId;
 
-    @Column(name = "account_number", length = 75, nullable = false,  unique = true)
+    @Column(name = "account_number", length = 75, nullable = false)
     private String accountNumber;
 
     @JsonSerialize(using = AccountTypeSerializer.class)
