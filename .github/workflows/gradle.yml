@@ -1,0 +1,85 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  BuildClient:
+    name: Build Client MS and run tests 
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Change wrapper permissions
+        run: |
+          cd client/
+          chmod +x ./gradlew
+          chmod +x gradlew
+          chmod +x ./gradle
+          chmod +x gradle
+            
+      - name: Build with Client Microservice
+        run: ./client/gradlew build --no-daemon
+
+      - name: Run unit tests of Client Microservice
+        run: ./client/gradlew test
+        
+  BuildAccountAndMovement:
+    name: Build Account and Movement MS and run tests 
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'corretto'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Change wrapper permissions
+        run: |
+          cd ../account_movement/
+          chmod +x ./gradlew
+          chmod +x gradlew
+          chmod +x ./gradle
+          chmod +x gradle
+          
+      - name: Build with Account and Movement Microservice
+        run: ./account_movement/gradlew build --no-daemon
+
+      - name: Run unit tests of Account and Movement Microservice
+        run: ./account_movement/gradlew test    
+        
