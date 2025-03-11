@@ -11,6 +11,8 @@ https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html
 ### Go to this folder in your command line
 [Link to Docker file](./deploy/docker/)
 ### To build docker image in this directory insert following command
+- `docker pull gradle:8.4-jdk21`
+- `docker pull eclipse-temurin:21`
 - `docker compose up -d`
 ### In DBeaver insert the tables from following folder
 #### Client SQL
