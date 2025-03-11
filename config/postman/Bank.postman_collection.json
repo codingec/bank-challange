@@ -443,7 +443,7 @@
 	"variable": [
 		{
 			"key": "domain",
-			"value": "http://localhost:80/banco",
+			"value": "http://localhost:80",
 			"type": "string"
 		},
 		{
@@ -453,7 +453,7 @@
 		},
 		{
 			"key": "domain_account",
-			"value": "http://localhost:83/banco",
+			"value": "http://localhost:83",
 			"type": "string"
 		},
 		{
@@ -463,12 +463,12 @@
 		},
 		{
 			"key": "startDate",
-			"value": "2025-03-07T18:18:00",
+			"value": "2025-03-07 18:18:00",
 			"type": "string"
 		},
 		{
 			"key": "endDate",
-			"value": "2025-03-13T18:18:00",
+			"value": "2025-03-13 18:18:00",
 			"type": "string"
 		}
 	]
