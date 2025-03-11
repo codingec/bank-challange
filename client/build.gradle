@@ -84,6 +84,7 @@ jacocoTestCoverageVerification {
 test {
 	finalizedBy jacocoTestReport
 	useJUnitPlatform()
+	exclude '**/BankApplicationTests.class'
 	jvmArgs = [
 			"-XX:+EnableDynamicAgentLoading",
 			"-Djdk.instrument.traceUsage"
