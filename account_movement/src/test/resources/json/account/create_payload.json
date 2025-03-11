@@ -1,0 +1,7 @@
+{
+  "identificacion_cliente": 1,
+  "numero_cuenta": "72322664",
+  "tipo_cuenta": "Corriente",
+  "saldo_inicial": 20000.0,
+  "estado": true
+}

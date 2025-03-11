@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  bank_postgres:
+    image: postgres:16
+    container_name: bank_postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    networks:
+      - microservices-network
+
+  bank_client:
+    container_name: bank_client
+    hostname: bank-client
+    build:
+      context: ../../client/
+      dockerfile: Dockerfile
+    environment:
+      PORT: 80
+      SWAGGER_ENABLE: true
+      SPRING_PROFILE: production
+      JDBC_URL: jdbc:postgresql://bank_postgres:5432/postgres
+      JDBC_DRIVER: org.postgresql.Driver
+      JDBC_USERNAME: postgres
+      JDBC_PASSWORD: postgres
+      HIBERNATE_DDL: create
+      HIBERNATE_GENERATE: true
+      HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+    ports:
+      - "80:80"
+    depends_on:
+      - bank_postgres
+    networks:
+      - microservices-network
+   
+  bank_account:
+    container_name: bank_account_movement
+    hostname: bank-account-movement
+    build:
+      context: ../../account_movement/
+      dockerfile: Dockerfile
+    environment:
+      PORT: 83
+      SWAGGER_ENABLE: true
+      SPRING_PROFILE: production
+      JDBC_URL: jdbc:postgresql://bank_postgres:5432/postgres
+      JDBC_DRIVER: org.postgresql.Driver
+      JDBC_USERNAME: postgres
+      JDBC_PASSWORD: postgres
+      HIBERNATE_DDL: create
+      HIBERNATE_GENERATE: true
+      HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      CLIENT_ENDPOINT: http://bank-client:80/api/clientes/?identificacion=
+    ports:
+      - "83:83"
+    depends_on:
+      - bank_postgres
+      - bank_client
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge

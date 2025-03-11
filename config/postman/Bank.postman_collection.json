@@ -1,0 +1,475 @@
+{
+	"info": {
+		"_postman_id": "3ffbb6e2-6f8b-413e-b5cd-66780ccdae1e",
+		"name": "Bank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "5427754"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "Create Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"persona\": {\r\n    \"nombre\": \"Leon\",\r\n    \"genero\": \"Masculino\",// Masculino  - Femenino\r\n     \"edad\": 18,\r\n     \"identificacion\": \"111291234521\",\r\n     \"direccion\": \"Juan Jose Leanodas Proaño y La que cruza\",\r\n     \"telefono\": \"0969372466\"\r\n  },\r\n   \"contraseña\": \"123\",\r\n   \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain}}/api/clientes"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Client",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain}}/api/clientes"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by client id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/clientes/{{id}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by client nationalId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/clientes/?identificacion={{nationalId}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								""
+							],
+							"query": [
+								{
+									"key": "identificacion",
+									"value": "{{nationalId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update client",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"persona\": {\r\n    \"nombre\": \"Ady\",\r\n    \"genero\": \"Masculino\",// Masculino  - Femenino\r\n     \"edad\": 18,\r\n     \"identificacion\": \"111291234521\",\r\n     \"direccion\": \"Juan Jose Leanodas Proaño y La que cruza\",\r\n     \"telefono\": \"0969372466\"\r\n  },\r\n   \"contraseña\": \"123\",\r\n   \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/clientes/{{id}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete client",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/api/clientes/{{id}}",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"clientes",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identificacion_cliente\": 111291234521,\r\n  \"numero_cuenta\": \"72322664\",\r\n  \"tipo_cuenta\": \"Corriente\",// Ahorro - Corriente\r\n  \"saldo_inicial\": 20000.0,\r\n  \"estado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain_account}}/api/cuentas"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain_account}}/api/cuentas"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Account id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain_account}}/api/cuentas/{{id}}",
+							"host": [
+								"{{domain_account}}"
+							],
+							"path": [
+								"api",
+								"cuentas",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identificacion_cliente\": 111291234521,\r\n  \"numero_cuenta\": \"12322444\",\r\n  \"tipo_cuenta\": \"Ahorro\",// Ahorro - Corriente\r\n  \"saldo_inicial\": 60000.0,\r\n  \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain_account}}/api/cuentas/{{id}}",
+							"host": [
+								"{{domain_account}}"
+							],
+							"path": [
+								"api",
+								"cuentas",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{domain_account}}/api/cuentas/{{id}}",
+							"host": [
+								"{{domain_account}}"
+							],
+							"path": [
+								"api",
+								"cuentas",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movement",
+			"item": [
+				{
+					"name": "Create Movement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cuenta\": {\r\n        \"id\": 1,\r\n        \"identificacion_cliente\": 111291234521,\r\n        \"numero_cuenta\": \"72322664\",\r\n        \"tipo_cuenta\": \"Corriente\",// Ahorro - Corriente\r\n        \"saldo_inicial\": 20000.0,\r\n        \"estado\": true\r\n        },\r\n    \"tipo_movimiento\": \"Transferencia\",// Transferencia - Deposito\r\n    \"cuenta_receptora\": \"2818265546\",\r\n    \"tipo_cuenta_receptora\": \"Ahorro\", // Ahorro - Corriente\r\n    \"valor\": 200,\r\n    \"fecha_transferencia\": \"2025-03-12 18:18:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{domain_account}}/api/movimientos"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Movement",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{domain_account}}/api/movimientos"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by movement id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain_account}}/api/movimientos/{{id}}",
+							"host": [
+								"{{domain_account}}"
+							],
+							"path": [
+								"api",
+								"movimientos",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Movement report by Dates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain_account}}/api/movimientos/reporte?fechaInicio={{startDate}}&fechaFin={{endDate}}",
+							"host": [
+								"{{domain_account}}"
+							],
+							"path": [
+								"api",
+								"movimientos",
+								"reporte"
+							],
+							"query": [
+								{
+									"key": "fechaInicio",
+									"value": "{{startDate}}"
+								},
+								{
+									"key": "fechaFin",
+									"value": "{{endDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movement",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cuenta\": {\r\n        \"id\": 1,\r\n        \"identificacion_cliente\": 111291234521,\r\n        \"numero_cuenta\": \"72322664\",\r\n        \"tipo_cuenta\": \"Corriente\",// Ahorro - Corriente\r\n        \"saldo_inicial\": 900000.0,\r\n        \"estado\": true\r\n        },\r\n    \"tipo_movimiento\": \"Transferencia\",// Transferencia - Deposito\r\n    \"cuenta_receptora\": \"2818265546\",\r\n    \"tipo_cuenta_receptora\": \"Ahorro\", // Ahorro - Corriente\r\n    \"valor\": 20, \r\n    \"fecha_transferencia\": \"2025-03-07 18:18:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain_account}}/api/movimientos/{{id}}",
+							"host": [
+								"{{domain_account}}"
+							],
+							"path": [
+								"api",
+								"movimientos",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Movement",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{domain_account}}/api/movimientos/{{id}}",
+							"host": [
+								"{{domain_account}}"
+							],
+							"path": [
+								"api",
+								"movimientos",
+								"{{id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "http://localhost:80/banco",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "domain_account",
+			"value": "http://localhost:83/banco",
+			"type": "string"
+		},
+		{
+			"key": "nationalId",
+			"value": "111291234521",
+			"type": "string"
+		},
+		{
+			"key": "startDate",
+			"value": "2025-03-07T18:18:00",
+			"type": "string"
+		},
+		{
+			"key": "endDate",
+			"value": "2025-03-13T18:18:00",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,12 @@
+{
+  "persona": {
+    "nombre": "Leon",
+    "genero": "Masculino",
+    "edad": 18,
+    "identificacion": "111291234521",
+    "direccion": "Juan Jose Leanodas Proaño y La que cruza",
+    "telefono": "0969372466"
+  },
+  "contraseña": "123",
+  "estado": true
+}
