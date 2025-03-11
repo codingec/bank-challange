@@ -1,11 +1,13 @@
-# BANCO
+# BANK
 ### Requirements to deploy the project
 ### Install Postman
+https://www.postman.com/
+### Install Bruno
+https://www.usebruno.com/
 ### Install DBeaver
+https://dbeaver.io/
 ### Install Docker
-### Install Postgres 16 
-### Install Open Java 21 Corretto
-https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html
+https://www.docker.com/
 
 # To Compile in Docker Both Micro services Client, Accounts and Movement
 ### Go to this folder in your command line
@@ -31,6 +33,7 @@ https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html
 ### Load Postman collection
 [Link to Postman Collection](./config/postman/)
 
+
 # Documentations of the microservices
 ## Link to Client README.md
 [Link to Client README](./client/README.md)
@@ -38,5 +41,5 @@ https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html
 ## Link to Accounts and Movement README.md
 [Link to Accounts and Movement README](./account_movement/README.md)
 
-## Postman Folder /config/postman/
+## import in Postman or Bruno Folder /config/postman/
 [Postman folder directory](./config/postman/)
