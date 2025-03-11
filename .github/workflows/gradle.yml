@@ -18,6 +18,17 @@ jobs:
   BuildClient:
     name: Build Client MS and run tests 
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        
     environment: production
     steps:
       - name: Checkout
@@ -43,7 +54,7 @@ jobs:
           chmod +x ./gradle
           chmod +x gradle
             
-      - name: Build with Client Microservice
+      - name: Build Client Microservice
         working-directory: ./client
         run: ./gradlew build --no-daemon
 
@@ -79,7 +90,7 @@ jobs:
           chmod +x ./gradle
           chmod +x gradle
           
-      - name: Build with Account and Movement Microservice
+      - name: Build Account and Movement Microservice
         working-directory: ./account_movement
         run: ./gradlew build --no-daemon
 
