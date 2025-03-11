@@ -1,9 +1,10 @@
 
-## Requirements to deploy the project
-## Install Postgres 16
-
-## Install Open Java 21 Corretto
-## Install Intellij
+# Requirements to deploy the project
+### Install Postgres 16 or you can use Docker postgres alternative
+https://www.postgresql.org/download/
+### Install Open Java 21 Corretto
+https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html
+### Install Intellij
 https://www.jetbrains.com/idea/download/
 
 ## SDK man installation
@@ -25,43 +26,47 @@ https://gradle.org/install/
 
 [Delete project tables](./config/sql/roll_back.sql)__
 
-### Generate Database with Spring Boot
+# Generate Database with Spring Boot
 To generate database with Spring Boot variables have to be true
 - `HIBERNATE_DDL=create;`
 - `HIBERNATE_GENERATE=true;`
   ![alt text](./config/image_config/generate_sql_with_spring_boot.png)
 
-## Postman Folder /config/postman/
+# Postman Folder /config/postman/
 [Postman folder directory](./config/postman/)
 
-## Swagger Api Call only for localhost permitted for security reasons
+# Swagger Api Call only for localhost permitted for security reasons
 http://localhost/banco/swagger-ui/index.html#/
 
-## Environment variables for Local machine
+# Environment variables for Local machine
 ![alt text](./config/image_config/environment_config.png)
 
-### Variables for intellij
+# Variables for intellij
 - `PORT=83;SWAGGER_ENABLE=true;SPRING_PROFILE=dev;JDBC_URL=jdbc:postgresql://localhost:5432/postgres;JDBC_DRIVER=org.postgresql.Driver;JDBC_USERNAME=postgres;JDBC_PASSWORD=postgres;HIBERNATE_DDL=create;HIBERNATE_GENERATE=true;HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect;CLIENT_ENDPOINT=http://localhost:80/api/clientes/?identificacion=;`
-### Where to locate the variables in Intellij
+#### Where to locate the variables in Intellij
 ![alt text](./config/image_config/location_of_environment_variables.png)
 
-### Environment variables for Docker or deploying in production
+#### Environment variables for Docker or deploying in production
 - `PORT=83;SWAGGER_ENABLE=true;SPRING_PROFILE=dev;JDBC_URL=jdbc:postgresql://localhost:5432/postgres;JDBC_DRIVER=org.postgresql.Driver;JDBC_USERNAME=postgres;JDBC_PASSWORD=postgres;HIBERNATE_DDL=create;HIBERNATE_GENERATE=true;HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect;CLIENT_ENDPOINT=http://localhost:80/api/clientes/?identificacion=;`
 
+#### Location of environment variables
+[Environment variables](./dev.env)__
 
-### Run tests
+
+# Commands to build, test with gradle
+#### Run tests
 - `gradle test`
 
-### To clean app
+#### To clean app
 - `gradle clean`
 
-### Before compiling
+#### Before compiling
 - `gradle task --all`
 
-### To build app
+#### To build app
 - `gradle build`
 
-### Run tests
+#### Run tests
 - `gradle test`
 
 #### Run in local machine
