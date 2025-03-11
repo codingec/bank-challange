@@ -14,6 +14,15 @@ https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html
 - `docker pull gradle:8.4-jdk21`
 - `docker pull eclipse-temurin:21`
 - `docker compose up -d`
+
+### In DBeaver insert the tables from following folder
+#### DBeaver CONFIG
+##### Host: localhost
+##### Database: postgres
+##### username: postgres
+##### password: postgres
+![alt text](./config/postgreSQL/postgres.png)
+
 ### In DBeaver insert the tables from following folder
 #### Client SQL
 [Link to Client SQL](./client/config/sql/initialize.sql)
