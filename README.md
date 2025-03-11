@@ -21,7 +21,7 @@ https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/downloads-list.html
 ##### Database: postgres
 ##### username: postgres
 ##### password: postgres
-![alt text](./config/postgreSQL/postgres.png)
+![alt text](./config/postgreSQL/postgres.jpeg)
 
 ### In DBeaver insert the tables from following folder
 #### Client SQL
