@@ -82,4 +82,8 @@ jacocoTestCoverageVerification {
 test {
 	finalizedBy jacocoTestReport
 	useJUnitPlatform()
+	jvmArgs = [
+			"-XX:+EnableDynamicAgentLoading",
+			"-Djdk.instrument.traceUsage"
+	]
 }
