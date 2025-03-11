@@ -36,18 +36,20 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Change wrapper permissions
+        working-directory: ./client
         run: |
-          cd client/
           chmod +x ./gradlew
           chmod +x gradlew
           chmod +x ./gradle
           chmod +x gradle
             
       - name: Build with Client Microservice
-        run: ./client/gradlew build --no-daemon
+        working-directory: ./client
+        run: ./gradlew build --no-daemon
 
       - name: Run unit tests of Client Microservice
-        run: ./client/gradlew test
+        working-directory: ./client
+        run: ./gradlew test
         
   BuildAccountAndMovement:
     name: Build Account and Movement MS and run tests 
@@ -70,16 +72,18 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Change wrapper permissions
+        working-directory: ./account_movement
         run: |
-          cd ../account_movement/
           chmod +x ./gradlew
           chmod +x gradlew
           chmod +x ./gradle
           chmod +x gradle
           
       - name: Build with Account and Movement Microservice
-        run: ./account_movement/gradlew build --no-daemon
+        working-directory: ./account_movement
+        run: ./gradlew build --no-daemon
 
       - name: Run unit tests of Account and Movement Microservice
-        run: ./account_movement/gradlew test    
+        working-directory: ./account_movement
+        run: ./gradlew test    
         
