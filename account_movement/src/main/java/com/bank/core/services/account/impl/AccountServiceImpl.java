@@ -9,6 +9,7 @@ import com.bank.core.services.consumer.client.response.ClientDTO;
 import com.bank.core.services.dto.AccountDTO;
 import com.bank.core.services.dto.response.ResponseDTO;
 import com.bank.core.services.mappers.AccountMapper;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -92,6 +93,7 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    @Transactional
     @Override
     public ResponseEntity<AccountDTO> update(Long id, AccountDTO accountDTO) {
         Optional<Account> update = this.accountRepository.findById(id);
@@ -112,6 +114,7 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    @Transactional
     @Override
     public ResponseEntity<ResponseDTO> delete(Long id) {
         Optional<Account> account = this.accountRepository.findById(id);

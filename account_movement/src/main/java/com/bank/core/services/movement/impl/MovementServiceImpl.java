@@ -17,6 +17,7 @@ import com.bank.core.services.movement.MovementService;
 import com.bank.core.services.dto.MovementDTO;
 import com.bank.core.services.mappers.MovementMapper;
 import com.bank.core.util.DateUtil;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -132,6 +133,7 @@ public class MovementServiceImpl implements MovementService {
         }
     }
 
+    @Transactional
     @Override
     public ResponseEntity<MovementDTO> update(Long id, MovementDTO movementDTO) {
         Optional<Movement> update  = this.movementRepository.findById(id);
@@ -155,6 +157,7 @@ public class MovementServiceImpl implements MovementService {
         }
     }
 
+    @Transactional
     @Override
     public ResponseEntity<ResponseDTO> delete(Long id) {
         Optional<Movement> movement = this.movementRepository.findById(id);
