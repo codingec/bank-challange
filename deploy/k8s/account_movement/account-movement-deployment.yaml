@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-account-movement
+  labels:
+    app: bank-account-movement
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bank-account-movement
+  template:
+    metadata:
+      labels:
+        app: bank-account-movement
+    spec:
+      containers:
+        - name: bank-account-movement
+          image: andrews2014/bank-account-movement:latest
+          ports:
+            - containerPort: 83
+          env:
+            - name: PORT
+              value: "83"
+            - name: SWAGGER_ENABLE
+              value: "true"
+            - name: SPRING_PROFILE
+              value: "production"
+            - name: JDBC_URL
+              value: "jdbc:postgresql://postgres-service:5432/postgres"
+            - name: JDBC_DRIVER
+              value: "org.postgresql.Driver"
+            - name: JDBC_USERNAME
+              value: "postgres"
+            - name: JDBC_PASSWORD
+              value: "postgres"
+            - name: HIBERNATE_DDL
+              value: "create"
+            - name: HIBERNATE_GENERATE
+              value: "true"
+            - name: HIBERNATE_DIALECT
+              value: "org.hibernate.dialect.PostgreSQLDialect"
+            - name: CLIENT_ENDPOINT
+              value: "http://bank-client:80/api/clientes/?identificacion="

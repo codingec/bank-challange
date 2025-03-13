@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-postgres
+  labels:
+    app: bank-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bank-postgres
+  template:
+    metadata:
+      labels:
+        app: bank-postgres
+    spec:
+      containers:
+        - name: bank-postgres
+          image: postgres:16
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "postgres"
+            - name: POSTGRES_DB
+              value: "postgres"

@@ -53,6 +53,11 @@ http://localhost/banco/swagger-ui/index.html#/
 [Environment variables](./dev.env)__
 
 
+#### Push Image to docker
+- `docker build -t bank-account-movement:latest .`
+- `docker tag bank-account-movement:latest ${docker_user}/bank-account-movement:latest`
+- `docker push ${docker_user}/bank-account-movement:latest`
+
 # Commands to build, test with gradle
 #### Run tests
 - `gradle test`

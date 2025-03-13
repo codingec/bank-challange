@@ -1,9 +1,8 @@
-version: '3.8'
-
 services:
   bank_postgres:
     image: postgres:16
     container_name: bank_postgres
+    hostname: bank-postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

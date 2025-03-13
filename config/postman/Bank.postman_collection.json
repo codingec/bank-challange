@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "3ffbb6e2-6f8b-413e-b5cd-66780ccdae1e",
-		"name": "Bank",
+		"name": "Bank Challenge",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "5427754"
 	},
@@ -23,7 +23,7 @@
 								}
 							}
 						},
-						"url": "{{domain}}/api/clientes"
+						"url": "{{client_domain}}/api/clientes"
 					},
 					"response": []
 				},
@@ -32,7 +32,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{domain}}/api/clientes"
+						"url": "{{client_domain}}/api/clientes"
 					},
 					"response": []
 				},
@@ -42,9 +42,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain}}/api/clientes/{{id}}",
+							"raw": "{{client_domain}}/api/clientes/{{id}}",
 							"host": [
-								"{{domain}}"
+								"{{client_domain}}"
 							],
 							"path": [
 								"api",
@@ -68,9 +68,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain}}/api/clientes/?identificacion={{nationalId}}",
+							"raw": "{{client_domain}}/api/clientes/?identificacion={{nationalId}}",
 							"host": [
-								"{{domain}}"
+								"{{client_domain}}"
 							],
 							"path": [
 								"api",
@@ -102,9 +102,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{domain}}/api/clientes/{{id}}",
+							"raw": "{{client_domain}}/api/clientes/{{id}}",
 							"host": [
-								"{{domain}}"
+								"{{client_domain}}"
 							],
 							"path": [
 								"api",
@@ -128,9 +128,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{domain}}/api/clientes/{{id}}",
+							"raw": "{{client_domain}}/api/clientes/{{id}}",
 							"host": [
-								"{{domain}}"
+								"{{client_domain}}"
 							],
 							"path": [
 								"api",
@@ -167,7 +167,7 @@
 								}
 							}
 						},
-						"url": "{{domain_account}}/api/cuentas"
+						"url": "{{account_m_domain}}/api/cuentas"
 					},
 					"response": []
 				},
@@ -176,7 +176,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{domain_account}}/api/cuentas"
+						"url": "{{account_m_domain}}/api/cuentas"
 					},
 					"response": []
 				},
@@ -186,9 +186,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain_account}}/api/cuentas/{{id}}",
+							"raw": "{{account_m_domain}}/api/cuentas/{{id}}",
 							"host": [
-								"{{domain_account}}"
+								"{{account_m_domain}}"
 							],
 							"path": [
 								"api",
@@ -221,9 +221,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{domain_account}}/api/cuentas/{{id}}",
+							"raw": "{{account_m_domain}}/api/cuentas/{{id}}",
 							"host": [
-								"{{domain_account}}"
+								"{{account_m_domain}}"
 							],
 							"path": [
 								"api",
@@ -247,9 +247,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{domain_account}}/api/cuentas/{{id}}",
+							"raw": "{{account_m_domain}}/api/cuentas/{{id}}",
 							"host": [
-								"{{domain_account}}"
+								"{{account_m_domain}}"
 							],
 							"path": [
 								"api",
@@ -286,7 +286,7 @@
 								}
 							}
 						},
-						"url": "{{domain_account}}/api/movimientos"
+						"url": "{{account_m_domain}}/api/movimientos"
 					},
 					"response": []
 				},
@@ -295,7 +295,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{domain_account}}/api/movimientos"
+						"url": "{{account_m_domain}}/api/movimientos"
 					},
 					"response": []
 				},
@@ -305,9 +305,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain_account}}/api/movimientos/{{id}}",
+							"raw": "{{account_m_domain}}/api/movimientos/{{id}}",
 							"host": [
-								"{{domain_account}}"
+								"{{account_m_domain}}"
 							],
 							"path": [
 								"api",
@@ -331,9 +331,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{domain_account}}/api/movimientos/reporte?fechaInicio={{startDate}}&fechaFin={{endDate}}",
+							"raw": "{{account_m_domain}}/api/movimientos/reporte?fechaInicio={{startDate}}&fechaFin={{endDate}}",
 							"host": [
-								"{{domain_account}}"
+								"{{account_m_domain}}"
 							],
 							"path": [
 								"api",
@@ -369,9 +369,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{domain_account}}/api/movimientos/{{id}}",
+							"raw": "{{account_m_domain}}/api/movimientos/{{id}}",
 							"host": [
-								"{{domain_account}}"
+								"{{account_m_domain}}"
 							],
 							"path": [
 								"api",
@@ -395,9 +395,9 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{domain_account}}/api/movimientos/{{id}}",
+							"raw": "{{account_m_domain}}/api/movimientos/{{id}}",
 							"host": [
-								"{{domain_account}}"
+								"{{account_m_domain}}"
 							],
 							"path": [
 								"api",
@@ -442,7 +442,7 @@
 	],
 	"variable": [
 		{
-			"key": "domain",
+			"key": "client_domain",
 			"value": "http://localhost:80",
 			"type": "string"
 		},
@@ -452,7 +452,7 @@
 			"type": "string"
 		},
 		{
-			"key": "domain_account",
+			"key": "account_m_domain",
 			"value": "http://localhost:83",
 			"type": "string"
 		},
