@@ -53,7 +53,7 @@ http://localhost/banco/swagger-ui/index.html#/
 [Environment variables](./dev.env)__
 
 
-#### Push Image to docker
+#### Push Image to Docker Hub
 - `docker build -t bank-account-movement:latest .`
 - `docker tag bank-account-movement:latest ${docker_user}/bank-account-movement:latest`
 - `docker push ${docker_user}/bank-account-movement:latest`
