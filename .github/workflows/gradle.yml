@@ -46,30 +46,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Replace placeholders Client properties application.properties
-        working-directory: ./client
-        run: |
-            sed -i "s|\${PORT}|${PORT}|g" src/main/resources/application.properties
-            sed -i "s|\${SWAGGER_ENABLE}|${SWAGGER_ENABLE}|g" src/main/resources/application.properties
-            sed -i "s|\${SPRING_PROFILE}|${SPRING_PROFILE}|g" src/main/resources/application.properties
-            sed -i "s|\${JDBC_URL}|${JDBC_URL}|g" src/main/resources/application.properties
-            sed -i "s|\${JDBC_DRIVER}|${JDBC_DRIVER}|g" src/main/resources/application.properties
-            sed -i "s|\${JDBC_PASSWORD}|${JDBC_PASSWORD}|g" src/main/resources/application.properties
-            sed -i "s|\${HIBERNATE_DDL}|${HIBERNATE_DDL}|g" src/main/resources/application.properties
-            sed -i "s|\${HIBERNATE_GENERATE}|${HIBERNATE_GENERATE}|g" src/main/resources/application.properties
-            sed -i "s|\${HIBERNATE_DIALECT}|${HIBERNATE_DIALECT}|g" src/main/resources/application.properties
-        env:
-          PORT: ${{ secrets.PORT_CLIENT }}
-          SWAGGER_ENABLE: ${{ secrets.SWAGGER_ENABLE }}
-          SPRING_PROFILE: ${{ secrets.SPRING_PROFILE }}
-          JDBC_URL: ${{ secrets.JDBC_URL }}
-          JDBC_DRIVER: ${{ secrets.JDBC_DRIVER }}
-          JDBC_USERNAME: ${{ secrets.JDBC_USERNAME }}
-          JDBC_PASSWORD: ${{ secrets.JDBC_PASSWORD }}
-          HIBERNATE_DDL: ${{ secrets.HIBERNATE_DDL }}
-          HIBERNATE_GENERATE: ${{ secrets.HIBERNATE_GENERATE }}
-          HIBERNATE_DIALECT: ${{ secrets.HIBERNATE_DIALECT }}
-
       - name: Change wrapper permissions
         working-directory: ./client
         run: |
@@ -115,32 +91,6 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-
-      - name: Replace placeholders Account and Movement properties application.properties
-        working-directory: ./account_movement
-        run: |
-          sed -i "s|\${PORT}|${PORT}|g" src/main/resources/application.properties
-          sed -i "s|\${SWAGGER_ENABLE}|${SWAGGER_ENABLE}|g" src/main/resources/application.properties
-          sed -i "s|\${SPRING_PROFILE}|${SPRING_PROFILE}|g" src/main/resources/application.properties
-          sed -i "s|\${JDBC_URL}|${JDBC_URL}|g" src/main/resources/application.properties
-          sed -i "s|\${JDBC_DRIVER}|${JDBC_DRIVER}|g" src/main/resources/application.properties
-          sed -i "s|\${JDBC_PASSWORD}|${JDBC_PASSWORD}|g" src/main/resources/application.properties
-          sed -i "s|\${HIBERNATE_DDL}|${HIBERNATE_DDL}|g" src/main/resources/application.properties
-          sed -i "s|\${HIBERNATE_GENERATE}|${HIBERNATE_GENERATE}|g" src/main/resources/application.properties
-          sed -i "s|\${HIBERNATE_DIALECT}|${HIBERNATE_DIALECT}|g" src/main/resources/application.properties
-          sed -i "s|\${CLIENT_ENDPOINT}|${CLIENT_ENDPOINT}|g" src/main/resources/application.properties
-        env:
-          PORT: ${{ secrets.PORT_CLIENT }}
-          SWAGGER_ENABLE: ${{ secrets.SWAGGER_ENABLE }}
-          SPRING_PROFILE: ${{ secrets.SPRING_PROFILE }}
-          JDBC_URL: ${{ secrets.JDBC_URL }}
-          JDBC_DRIVER: ${{ secrets.JDBC_DRIVER }}
-          JDBC_USERNAME: ${{ secrets.JDBC_USERNAME }}
-          JDBC_PASSWORD: ${{ secrets.JDBC_PASSWORD }}
-          HIBERNATE_DDL: ${{ secrets.HIBERNATE_DDL }}
-          HIBERNATE_GENERATE: ${{ secrets.HIBERNATE_GENERATE }}
-          HIBERNATE_DIALECT: ${{ secrets.HIBERNATE_DIALECT }}
-          CLIENT_ENDPOINT: ${{ secrets.CLIENT_ENDPOINT }}
 
       - name: Change wrapper permissions
         working-directory: ./account_movement
